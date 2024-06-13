@@ -6,6 +6,8 @@ lsp_zero.on_attach(function(client, bufnr)
   lsp_zero.default_keymaps({buffer = bufnr})
 end)
 
+vim.g.lsp_zero_ui_float_border = "rounded"
+
 -- here you can setup the language servers
 
 -- to learn how to use mason.nvim
@@ -19,3 +21,44 @@ require('mason-lspconfig').setup({
     end,
   },
 })
+
+require('lsp-zero').extend_cmp()
+
+local cmp = require('cmp')
+local cmp_action = require('lsp-zero').cmp_action()
+
+cmp.setup({
+  mapping = cmp.mapping.preset.insert({
+    ['<C-Space>'] = cmp.mapping.complete(),
+
+    -- Navigate between completion item
+    ['<C-k>'] = cmp.mapping.select_prev_item(),
+    ['<C-j>'] = cmp.mapping.select_next_item(),
+
+    -- Toggle completion
+    ['<Tab>'] = cmp.mapping.confirm({select = true}),
+    
+    -- Abort completion
+    ['<C-e>'] = cmp.mapping.abort(),
+
+    -- Navigate between snipper placeholders
+    ['<C-f>'] = cmp_action.luasnip_jump_forward(),
+    ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+  }),
+  
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
+
+  window = {
+    completion = cmp.config.window.bordered({
+        border = "rounded",
+    }),
+    documentation = cmp.config.window.bordered({
+        border = "rounded",
+    }),
+  },
+})
+
