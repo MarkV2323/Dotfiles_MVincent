@@ -26,7 +26,6 @@ return require('packer').startup(function(use)
     }
 
   -- LSP-Zero allows for an all in one LSP, Snippets and Code Completion
-  -- Ensure you have NodeJS installed in order to install LSPs through Mason
   use {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v3.x',
@@ -39,6 +38,12 @@ return require('packer').startup(function(use)
       {'hrsh7th/cmp-nvim-lsp'},
       {'L3MON4D3/LuaSnip'},
     }
+  }
+
+  -- Telescope allows for the easy lookup and swapping between files
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.6',
+    requires = { {'nvim-lua/plenary.nvim'} }
   }
 
 end)
