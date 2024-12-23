@@ -40,6 +40,8 @@ vim.opt.isfname:append("@-@")
 -- Not really sure what this does lol
 vim.opt.updatetime = 50
 
+-- Always open folds
+vim.opt.foldlevel=20
 
 -- require package manager lazy.vim
 require("config.lazy")
