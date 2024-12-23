@@ -6,9 +6,9 @@ This is a collection of all the various dotfiles I use in my Linux user home dir
 
 I like Gruvbox personally, you will need to search up Terminal themes based on the terminal you use. Depending on your terminal and how it displays colors, you may need to use a newer Terminal. On Mac OSX I prefer iTerm2, which allows for full color support. Windows terminal also has full color support. 
 
-## Z-shell overview
+## Shell overview
 
-* .bashrc - Contains useful alias, SSH key setup and prompt configuration.
+* .bash_profile - Contains useful alias, SSH key setup and prompt configuration.
 
 ## Neo-Vim overview
 
