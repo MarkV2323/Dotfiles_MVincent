@@ -8,7 +8,7 @@ I like Gruvbox personally, you will need to search up Terminal themes based on t
 
 ## Shell overview
 
-* .bash_profile - Contains useful alias, SSH key setup and prompt configuration.
+* .bash_profile - Contains useful alias, SSH key setup and prompt configuration. You should use this as your `.bashrc` if you are not running zsh.
 
 ## Neo-Vim overview
 
