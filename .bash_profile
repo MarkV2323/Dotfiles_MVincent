@@ -9,7 +9,7 @@ ssh-add ~/.ssh/git_key_ed25519
 echo "Sucessfully added Github SSH Key to agent!"
 
 # PATH related items
-#export PATH="$PATH:/opt/nvim-linux64/bin"
+export PATH="$PATH:/opt/nvim-linux64/bin"
 
 # history
 export HISTFILESIZE=20000
@@ -44,6 +44,10 @@ alias gr="git remove"
 alias ..="cd .."
 alias ...="cd../.."
 alias cdp="cd /c/csharp-apps/"
+
+# python
+alias python="python3"
+alias py="python"
 
 # dotnet
 alias dn="dotnet"
