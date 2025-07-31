@@ -4,7 +4,7 @@ vim.cmd([[colorscheme gruvbox]])
 
 -- Configure TREE sitter
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "lua", "vim", "vimdoc", "cpp", "cmake", "make" },
+  ensure_installed = { "lua", "vim", "vimdoc", "cpp", "cmake", "make", "python"},
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = true,
