@@ -38,10 +38,13 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 -- Not really sure what this does lol
-vim.opt.updatetime = 50
+vim.opt.updatetime=200
 
 -- Always open folds
 vim.opt.foldlevel=20
+
+-- Set netrw to display tree style
+vim.g.netrw_liststyle=3
 
 -- require package manager lazy.vim
 require("config.lazy")
@@ -49,3 +52,5 @@ require("config.lazy")
 -- require plugin configs after lazy
 require("config.plugins")
 
+-- Custom telescope keymap function
+require('config.telescope_remap')

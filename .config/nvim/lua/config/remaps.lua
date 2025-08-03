@@ -41,10 +41,6 @@ keymap.set('n', '<C-Down>', ':resize +2<CR>', opts)
 keymap.set('n', '<C-Left>', ':vertical resize -2<CR>', opts)
 keymap.set('n', '<C-Right>', ':vertical resize +2<CR>', opts)
 
--- Better visual mode movement
-keymap.set('v', 'J', ":m '>+1<CR>gv=gv", opts)
-keymap.set('v', 'K', ":m '<-2<CR>gv=gv", opts)
-
 -- Quicker scrollin
 keymap.set("n", "<c-y>", "3<c-y>", opts)
 keymap.set("n", "<c-e>", "3<c-e>", opts)
@@ -62,6 +58,21 @@ keymap.set('x', '<leader>p', '"_dP', opts)
 -- Yank to system clipboard
 keymap.set({ 'n', 'v' }, '<leader>y', '"+y', opts)
 keymap.set('n', '<leader>Y', '"+Y', opts)
+
+-- Helpful insert mode keybinds
+-- <C-a> - Move to beginning of line
+-- <C-e> - Move to end of line
+-- <C-o> - 1 normal mode cmd
+-- <C-h> - backspace
+-- <C-w> - backspce word
+-- <C-u> - backspace line
+-- <C-t> - tab
+-- <C-d> - Un tab
+-- <C-r>" - Paste from default register
+-- <C-r>* - Paste from system clipboard
+vim.keymap.set("i", "jj", "<Esc>", { desc = "Exit insert mode quickly" })
+vim.keymap.set("i", "<C-l>", "<Right>", { desc = "Move right" })
+vim.keymap.set("i", "<C-h>", "<Left>", { desc = "Move left" })
 
 function ToggleRelativeNumbers()
   if vim.wo.relativenumber then
