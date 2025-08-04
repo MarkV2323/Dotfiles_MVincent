@@ -1,78 +1,97 @@
--- Common Remaps
 local keymap = vim.keymap
-local opts = { noremap = true, silent = true }
 
--- Source init.vim
-keymap.set("n", "<leader>so", "<cmd>so ~/.config/nvim/init.lua<CR>", opts)
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ 🧰 General Utilities                                         │
+-- ╰──────────────────────────────────────────────────────────────╯
+keymap.set("n", "<leader>so", function()
+  -- Unload all lua modules under 'mark' (adjust to your namespace)
+  for name,_ in pairs(package.loaded) do
+    if name:match("^mark") then  -- change 'mark' to your lua config root if different
+      package.loaded[name] = nil
+    end
+  end
+  -- Reload init.lua
+  dofile(vim.fn.stdpath("config") .. "/init.lua")
+  print("Neovim config reloaded!")
+end, { desc = "Reload all Lua config files" })
+keymap.set("n", "<leader>h", "<cmd>noh<CR>", { desc = "Clear search highlight" })
 
--- NetRw
-keymap.set("n", "<leader>rw", vim.cmd.Ex)
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ 💾 File & Session Control                                    │
+-- ╰──────────────────────────────────────────────────────────────╯
+keymap.set("n", "<leader>w", "<cmd>w<CR>", { desc = "Write/save buffer" })
+keymap.set("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit current window" })
+keymap.set("n", "<leader>sq", "<cmd>wq<CR>", { desc = "Save and quit" })
+keymap.set("n", "<leader>ss", "<cmd>mksession!<CR>", { desc = "Save current session" })
 
--- Create sesh
-keymap.set("n", "<leader>ss", "<cmd>mksession!<CR>", opts)
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ 📂 File Navigation                                           │
+-- ╰──────────────────────────────────────────────────────────────╯
+keymap.set("n", "<leader>rw", vim.cmd.Ex, { desc = "Open NetRW (file explorer)" })
 
--- Save & Exit quickly
-keymap.set("n", "<leader>w", "<cmd>w<CR>", opts)
-keymap.set("n", "<leader>q", "<cmd>q<CR>", opts)
-keymap.set("n", "<leader>sq", "<cmd>wq<CR>", opts)
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ 🗂️ Tab Control                                               │
+-- ╰──────────────────────────────────────────────────────────────╯
+keymap.set("n", "<leader>tn", "<cmd>tabnew<CR>", { desc = "Tab Open new tab" })
+keymap.set("n", "<leader>tc", "<cmd>tabclose<CR>", { desc = "Tab Close current tab" })
+keymap.set("n", "<leader>1", "1gt", { desc = "Tab Go to tab 1" })
+keymap.set("n", "<leader>2", "2gt", { desc = "Tab Go to tab 2" })
+keymap.set("n", "<leader>3", "3gt", { desc = "Tab Go to tab 3" })
+keymap.set("n", "<leader>4", "4gt", { desc = "Tab Go to tab 4" })
 
--- Exit search
-keymap.set("n", "<leader>h", "<cmd>noh<CR>", opts)
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ 📑 Split Navigation & Resize                                 │
+-- ╰──────────────────────────────────────────────────────────────╯
+keymap.set("n", "<leader>bs", "<cmd>sp<CR>", { desc = "Window Horizontal split" })
+keymap.set("n", "<leader>bv", "<cmd>vs<CR>", { desc = "Window Vertical split" })
+keymap.set("n", "<leader><left>", "<c-w><left>", { desc = "Window Move to left split" })
+keymap.set("n", "<leader><right>", "<c-w><right>", { desc = "Window Move to right split" })
+keymap.set("n", "<leader><up>", "<c-w><up>", { desc = "Window Move to upper split" })
+keymap.set("n", "<leader><down>", "<c-w><down>", { desc = "Window Move to lower split" })
 
--- Tabs
-keymap.set("n", "<leader>tn", "<cmd>tabnew<CR>", opts)
-keymap.set("n", "<leader>tc", "<cmd>tabclose<CR>", opts)
-keymap.set("n", "<leader>1", "1gt", opts)
-keymap.set("n", "<leader>2", "2gt", opts)
-keymap.set("n", "<leader>3", "3gt", opts)
-keymap.set("n", "<leader>4", "4gt", opts)
+keymap.set("n", "<C-Up>", ":resize -2<CR>", { desc = "Window Decrease window height" })
+keymap.set("n", "<C-Down>", ":resize +2<CR>", { desc = "Window Increase window height" })
+keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "Window Decrease window width" })
+keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "Window Increase window width" })
 
--- Buffer
-keymap.set("n", "<leader>bs", "<cmd>sp<CR>", opts)
-keymap.set("n", "<leader>bv", "<cmd>vs<CR>", opts)
-keymap.set("n", "<leader><left>", "<c-w><left>", opts)
-keymap.set("n", "<leader><right>", "<c-w><right>", opts)
-keymap.set("n", "<leader><up>", "<c-w><up>", opts)
-keymap.set("n", "<leader><down>", "<c-w><down>", opts)
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ 🏃 Scroll Enhancements                                       │
+-- ╰──────────────────────────────────────────────────────────────╯
+keymap.set("n", "<C-y>", "3<C-y>", { desc = "Scroll up faster" })
+keymap.set("n", "<C-e>", "3<C-e>", { desc = "Scroll down faster" })
 
--- Resize windows
-keymap.set('n', '<C-Up>', ':resize -2<CR>', opts)
-keymap.set('n', '<C-Down>', ':resize +2<CR>', opts)
-keymap.set('n', '<C-Left>', ':vertical resize -2<CR>', opts)
-keymap.set('n', '<C-Right>', ':vertical resize +2<CR>', opts)
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ ✂️ Editing Enhancements                                      │
+-- ╰──────────────────────────────────────────────────────────────╯
+keymap.set("n", "J", "mzJ`z", { desc = "Join lines without moving cursor" })
+keymap.set("n", "n", "nzzzv", { desc = "Search next and center" })
+keymap.set("n", "N", "Nzzzv", { desc = "Search prev and center" })
+keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without overwriting clipboard" })
 
--- Quicker scrollin
-keymap.set("n", "<c-y>", "3<c-y>", opts)
-keymap.set("n", "<c-e>", "3<c-e>", opts)
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ 📋 Yank & Clipboard                                          │
+-- ╰──────────────────────────────────────────────────────────────╯
+keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
+keymap.set("n", "<leader>Y", '"+Y', { desc = "Yank line to system clipboard" })
 
--- Join lines without moving cursor
-keymap.set('n', 'J', 'mzJ`z', opts)
+-- ╭──────────────────────────────────────────────────────────────╮
+-- │ 📝 Insert Mode Shortcuts                                     │
+-- ╰──────────────────────────────────────────────────────────────╯
+keymap.set("i", "jj", "<Esc>", { desc = "Insert Exit insert mode quickly" })
+keymap.set("i", "<C-l>", "<Right>", { desc = "Insert Move right" })
+keymap.set("i", "<C-h>", "<Left>", { desc = "Insert Move left" })
+keymap.set("i", "<C-a>", "<Home>", { desc = "Insert Move to beginning of line" })
+keymap.set("i", "<C-e>", "<End>", { desc = "Insert Move to end of line" })
+keymap.set("i", "<C-h>", "<BS>", { desc = "Insert Backspace character" })
+keymap.set("i", "<C-w>", "<C-w>", { desc = "Insert Backspace word" })
+keymap.set("i", "<C-u>", "<C-u>", { desc = "Insert Backspace to line start" })
+keymap.set("i", "<C-t>", "<Tab>", { desc = "Insert Insert tab" })
+keymap.set("i", "<C-d>", "<Del>", { desc = "Insert Delete character under cursor" })
+keymap.set("i", "<C-o>", "<C-o>", { desc = "Insert Execute one normal mode command" })
+keymap.set("i", "<C-r>\"", '<C-r>"', { desc = "Insert Paste from default register" })
+keymap.set("i", "<C-r>*", '<C-r>*', { desc = "Insert Paste from system clipboard" })
 
--- Keep cursor centered when searching
-keymap.set('n', 'n', 'nzzzv', opts)
-keymap.set('n', 'N', 'Nzzzv', opts)
-
--- Paste without overwriting clipboard
-keymap.set('x', '<leader>p', '"_dP', opts)
-
--- Yank to system clipboard
-keymap.set({ 'n', 'v' }, '<leader>y', '"+y', opts)
-keymap.set('n', '<leader>Y', '"+Y', opts)
-
--- Helpful insert mode keybinds
--- <C-a> - Move to beginning of line
--- <C-e> - Move to end of line
--- <C-o> - 1 normal mode cmd
--- <C-h> - backspace
--- <C-w> - backspce word
--- <C-u> - backspace line
--- <C-t> - tab
--- <C-d> - Un tab
--- <C-r>" - Paste from default register
--- <C-r>* - Paste from system clipboard
-vim.keymap.set("i", "jj", "<Esc>", { desc = "Exit insert mode quickly" })
-vim.keymap.set("i", "<C-l>", "<Right>", { desc = "Move right" })
-vim.keymap.set("i", "<C-h>", "<Left>", { desc = "Move left" })
+-- Functions
 
 function ToggleRelativeNumbers()
   if vim.wo.relativenumber then

@@ -1,9 +1,6 @@
 -- IMPORTANT: This is my leader key setting
 vim.g.mapleader = " "
 
--- Neovim configurations
-require ("config.remaps")
-
 -- Non plugin configurations
 
 -- Line Numbers
@@ -17,7 +14,7 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
 -- Enable smart indent
-vim.opt.smartindent = true
+vim.opt.smartindent = false
 
 -- Disable wrapping of text
 vim.opt.wrap = false
@@ -42,6 +39,9 @@ vim.opt.updatetime=200
 
 -- Always open folds
 vim.opt.foldlevel=20
+-- Requires treesitter for foding
+vim.opt.foldmethod="expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- Set netrw to display tree style
 vim.g.netrw_liststyle=3
@@ -52,5 +52,5 @@ require("config.lazy")
 -- require plugin configs after lazy
 require("config.plugins")
 
--- Custom telescope keymap function
-require('config.telescope_remap')
+-- require remaps
+require ("config.remaps")

@@ -27,6 +27,8 @@ require("lazy").setup({
     { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true, opts = ... },
     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
     { "nvim-telescope/telescope.nvim", tag = "0.1.8", dependencies = { "nvim-lua/plenary.nvim" }},
+    { "rafamadriz/friendly-snippets" },
+    { "L3MON4D3/LuaSnip", version = "v2.4", build = "make install_jsregexp", dependencies = { "rafamadriz/friendly-snippets" }},
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
