@@ -42,7 +42,7 @@ alias h="history"
 alias c="clear"
 
 # ls
-alias ls="ls --color=auto"
+alias ls="ls -a --color=auto"
 alias l="ls -CF"
 alias ll="ls -alF"
 alias lt="ls -alFt"
