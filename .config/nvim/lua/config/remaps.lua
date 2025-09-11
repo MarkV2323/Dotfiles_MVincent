@@ -116,3 +116,12 @@ function ToggleWrap()
   end
 end
 vim.keymap.set('n', '<leader>z', ToggleWrap, { desc = 'Toggle word wrap' })
+
+-- Allows for clang-format to be called on save of C++ files
+function ClangFormat()
+  local filepath = vim.fn.expand("%:p")
+  os.execute("clang-format -i " .. filepath)
+  vim.cmd("edit!")
+end
+vim.keymap.set('n', '<leader>F', ClangFormat, { desc = 'Format a C++ file' })
+
