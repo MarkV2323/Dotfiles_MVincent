@@ -7,17 +7,21 @@ export NVIM_HOME="$HOME/.config/nvim"
 export BASH_PROFILE="$HOME/.bash_profile"
 export DOTFILES_HOME="$DOCS/Dotfiles_MVincent"
 
+# Check what venv you are in
+export INVENV=$(python3 -c 'import sys; print ("1" if hasattr(sys, "real_prefix") else "0")')
+
 # Start SSH-Agent and add Github SSH key
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/git_key_ed25519
 echo "Sucessfully added Github SSH Key to agent!"
 
 # PATH related items
+export NVIM_HOME="/opt/nvim-linux64"
 export VCPKGHOME="/opt/vcpkg"
 export VCPKGCMAKE="$VCPKGHOME/scripts/buildsystems/vcpkg.cmake"
 export CMAKEHOME="/opt/cmake-4.1.0-linux-x86_64"
 
-export PATH="$PATH:/opt/nvim-linux/bin"
+export PATH="$PATH:$NVIM_HOME/bin"
 export PATH="$PATH:$VCPKGHOME"
 export PATH="$PATH:$CMAKEHOME/bin"
 
@@ -32,8 +36,12 @@ HISTCONTROL=ignoredups
 alias bso="source ~/.bashrc"
 alias bsh="nvim ~/.bash_profile"
 alias nconf="nvim ~/.config/nvim"
+
+# For updating local dotfiles
 alias getdotfiles="cp -r $DOTFILES_HOME/.config/nvim $HOME/.config"
 alias getbashprofile="cp $DOTFILES_HOME/.bash_profile $HOME/.bash_profile"
+
+# For updating git dotfiles with local dotfiles
 alias updatedf="cp -r $HOME/.config/nvim $DOTFILES_HOME/.config"
 alias updatebash="cp $HOME/.bash_profile $DOTFILES_HOME/.bash_profile"
 
@@ -58,28 +66,32 @@ alias gr="git remove"
 # cd
 alias ..="cd .."
 alias ...="cd../.."
-alias cdp="cd /c/csharp-apps/"
 
 # python
 alias python="python3"
 alias py="python"
-
-# dotnet
-alias dn="dotnet"
-alias dnb="dotnet build"
-alias dnr="dotnet run"
-alias dnw="dotnet watch"
 
 # cmake
 alias cbuild="cmake -B build/ -DCMAKE_TOOLCHAIN_FILE=$VCPKGCMAKE && cmake --build build/"
 
 alias folders='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
 
+# nordvpn
+alias vpnc='nordvpn c Denver'
+alias vpnd='nordvpn d'
+
+# playerctl (spotify)
+alias pc='playerctl'
+alias pcpl='pc play'
+alias pcp='pc pause'
+alias pcn='pc next'
+alias pcl='pc previous'
+
 cd() { # automatic cd
     builtin cd "$@" && ll
 }
 
-function fawk { # extract column output from command (df -h | fawk 2)
+fawk() { # extract column output from command (df -h | fawk 2)
     first="awk '{print "
     last="}'"
     cmd="${first}\$${1}${last}"
