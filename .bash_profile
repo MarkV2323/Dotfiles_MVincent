@@ -21,6 +21,9 @@ export VCPKGHOME="/opt/vcpkg"
 export VCPKGCMAKE="$VCPKGHOME/scripts/buildsystems/vcpkg.cmake"
 export CMAKEHOME="/opt/cmake-4.1.0-linux-x86_64"
 
+export VISUAL="$NVIM_HOME/bin/nvim"
+export EDITOR="$NVIM_HOME/bin/nvim"
+
 export PATH="$PATH:$NVIM_HOME/bin"
 export PATH="$PATH:$VCPKGHOME"
 export PATH="$PATH:$CMAKEHOME/bin"
