@@ -47,10 +47,8 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.g.netrw_liststyle=3
 
 -- require package manager lazy.vim
+-- plug configs are loaded through this lazy file
 require("config.lazy")
-
--- require plugin configs after lazy
-require("config.plugins")
 
 -- require remaps
 require ("config.remaps")

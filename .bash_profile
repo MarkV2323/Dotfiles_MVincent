@@ -43,7 +43,10 @@ alias nconf="nvim ~/.config/nvim"
 # For updating local dotfiles
 alias getdotfiles="cp -r $DOTFILES_HOME/.config/nvim $HOME/.config"
 alias getbashprofile="cp $DOTFILES_HOME/.bash_profile $HOME/.bash_profile"
-alias getdf="getdotfiles && getbashprofile"
+
+# For updating git dotfiles with local dotfiles
+alias updatedf="cp -r $HOME/.config/nvim $DOTFILES_HOME/.config"
+alias updatebash="cp $HOME/.bash_profile $DOTFILES_HOME/.bash_profile"
 
 # general
 alias h="history"
@@ -73,7 +76,7 @@ alias python="python3"
 alias py="python"
 
 # cmake
-alias cbuild="cmake -B build/ -DCMAKE_TOOLCHAIN_FILE=$VCPKGCMAKE && cmake --build build/"
+alias cbuild="cmake -B build/ -DCMAKE_TOOLCHAIN_FILE=$VCPKGCMAKE -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && cmake --build build/"
 
 alias folders='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
 

@@ -24,15 +24,21 @@ vim.g.maplocalleader = "\\"
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true, opts = ... },
-    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-    { "nvim-telescope/telescope.nvim", tag = "0.1.8", dependencies = { "nvim-lua/plenary.nvim" }},
-    { "rafamadriz/friendly-snippets" },
-    { "L3MON4D3/LuaSnip", version = "v2.4", build = "make install_jsregexp", dependencies = { "rafamadriz/friendly-snippets" }},
+    -- Gruvbox plugin, loaded first
+    {
+      "ellisonleao/gruvbox.nvim",
+      lazy = false,        -- load immediately
+      priority = 1000,     -- load first
+      config = function()
+        vim.o.background = "dark"
+        vim.o.termguicolors = true
+        vim.cmd([[colorscheme gruvbox]])
+      end,
+    },
+    require("config.plugins"), -- <-- loads plugins
   },
   -- Configure any other settings here. See the documentation for more details.
-  -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
 })
+
