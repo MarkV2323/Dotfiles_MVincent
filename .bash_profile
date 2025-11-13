@@ -43,6 +43,7 @@ alias nconf="nvim ~/.config/nvim"
 # For updating local dotfiles
 alias getdotfiles="cp -r $DOTFILES_HOME/.config/nvim $HOME/.config"
 alias getbashprofile="cp $DOTFILES_HOME/.bash_profile $HOME/.bash_profile"
+alias getdf="getdotfiles && getbashprofile"
 
 # For updating git dotfiles with local dotfiles
 alias updatedf="cp -r $HOME/.config/nvim $DOTFILES_HOME/.config"
