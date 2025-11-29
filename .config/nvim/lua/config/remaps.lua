@@ -126,7 +126,9 @@ end
 vim.keymap.set('n', '<leader>F', ClangFormat, { desc = 'Format a C++ file' })
 
 -- Telescope diagnostics
-vim.keymap.set("n", "<leader>td", function()
+vim.keymap.set("n", "<leader>tm", function()
   require("telescope.builtin").diagnostics()
 end, { desc = "Telescope: Diagnostics - File Errors" })
+
+vim.keymap.set("n", "<leader>em", vim.diagnostic.open_float, { desc = "Error Message" })
 
