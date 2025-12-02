@@ -46,8 +46,9 @@ alias getbashprofile="cp $DOTFILES_HOME/.bash_profile $HOME/.bash_profile"
 alias getdf="getdotfiles && getbashprofile"
 
 # For updating git dotfiles with local dotfiles
-alias updatedf="cp -r $HOME/.config/nvim $DOTFILES_HOME/.config"
+alias updatedotfiles="cp -r $HOME/.config/nvim $DOTFILES_HOME/.config"
 alias updatebash="cp $HOME/.bash_profile $DOTFILES_HOME/.bash_profile"
+alias updatedf="updatedotfiles && updatebash"
 
 # general
 alias h="history"
@@ -55,7 +56,7 @@ alias c="clear"
 
 # ls
 alias ls="ls -a --color=auto"
-alias l="ls -CF"
+alias l="ls -aCF --ignore='.*'"
 alias ll="ls -alF"
 alias lt="ls -alFt"
 
@@ -69,8 +70,6 @@ alias gr="git remove"
 
 # cd
 alias cdd="cd $DOCS"
-alias ..="cd .."
-alias ...="cd../.."
 
 # python
 alias python="python3"
@@ -93,7 +92,18 @@ alias pcn='pc next'
 alias pcl='pc previous'
 
 cd() { # automatic cd
-    builtin cd "$@" && ll
+    builtin cd "$@" && l
+}
+
+up() { # move up from dirs easier
+    local n=${1:-1}
+    while (( n > 0 )); do
+        if [[ $(pwd) == "/" ]]; then
+            break
+        fi
+        cd .. || return
+        ((n--))
+    done
 }
 
 fawk() { # extract column output from command (df -h | fawk 2)
